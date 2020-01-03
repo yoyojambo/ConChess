@@ -53,8 +53,8 @@ class chess(object):
             self.destiny = [8 - int(self.move[4]) , ord(self.move[3].lower()) - 97]
 
     def movepiece(self, o, d):
-        if self.board[d[0]][d[1]].isupper != self.board[o[0]][o[1]].isupper:
-            if self.pieceallowedmove(self.board[d[0]][d[1]], self.board[o[0]][o[1]]):
+        if self.board[d[0]][d[1]].isupper != self.board[o[0]][o[1]].isupper and self.board[o[0]][o[1]] != '':
+            if self.pieceallowedmove(self.board[o[0]][o[1]].lower(), self.board[d[0]][d[1]]):
                 self.board[d[0]][d[1]] = self.board[o[0]][o[1]]
                 self.board[o[0]][o[1]] = ''
                 self.turn = not self.turn
@@ -65,6 +65,32 @@ class chess(object):
             print("You can't eat you own piece.")
             self.takeinput()
         
+    def pieceallowedmove(self, origin, destiny):
+        if origin == 'p':
+            if turn:
+                if origin[1] == destiny[1] and origin[0] == destiny[0]+1:
+                    return True
+            else:
+                if origin[1] == destiny[1] and origin[0] == destiny[0]-1:
+                    return True
+            return False
+        elif origin == 'k':
+            if destiny[0] == origin[0]-1 and destiny[1] == origin[1] - 3:
+                pass
+            elif destiny[0] == origin[0] - 3 and destiny[1] == origin[1] - 1:
+                pass
+            elif destiny[0] == origin[0] - 1 and destiny[1] == origin[1] + 3:
+                pass
+            elif destiny[0] == origin[0] + 3 and destiny[1] == origin[1] - 1:
+                pass
+        elif origin == 'c':
+            if origin[0] == destiny[0] and origin[1] != destiny[1]:
+                return True
+            elif origin[1] == destiny[1] and origin[0] != destiny[0]:
+                return True
+            else:
+                return False
+ 
 
 if __name__ == "__main__":
     chess = chess()
