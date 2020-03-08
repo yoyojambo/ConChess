@@ -15,7 +15,7 @@ class chess(object):
     def __init__(self):
         self.board = [
             ['c','k','b','w','q','b','k','c'],
-            ['p','p','p','p','p','p','p','p'],
+             ['p','p','p','p','p','p','p','p'],
             ['', '', '', '', '', '', '', ''],
             ['', '', '', '', '', '', '', ''],
             ['', '', '', '', '', '', '', ''],
@@ -38,7 +38,7 @@ class chess(object):
         else:
             self.move = input("Black movement: ")
         
-        if self.move == "exit":
+        if self.move.lower == "exit":
             quit()
 
         if ord(self.move[0]) > 104 or ord(self.move[0]) < 97:
@@ -53,6 +53,11 @@ class chess(object):
             self.destiny = [8 - int(self.move[4]) , ord(self.move[3].lower()) - 97]
 
     def movepiece(self, o, d):
+        if self.board[o[0]][o[1]].isupper == self.turn:
+            pass
+        else:
+            print("That is not an allowed move for that piece.")
+            break
         if self.board[d[0]][d[1]].isupper != self.board[o[0]][o[1]].isupper and self.board[o[0]][o[1]] != '':
             if self.pieceallowedmove(self.board[o[0]][o[1]].lower(), self.board[d[0]][d[1]]):
                 self.board[d[0]][d[1]] = self.board[o[0]][o[1]]
@@ -75,18 +80,22 @@ class chess(object):
                     return True
             return False
         elif origin == 'k':
-            if destiny[0] == origin[0]-1 and destiny[1] == origin[1] - 3:
-                pass
-            elif destiny[0] == origin[0] - 3 and destiny[1] == origin[1] - 1:
-                pass
-            elif destiny[0] == origin[0] - 1 and destiny[1] == origin[1] + 3:
-                pass
-            elif destiny[0] == origin[0] + 3 and destiny[1] == origin[1] - 1:
-                pass
-        elif origin == 'c':
-            if origin[0] == destiny[0] and origin[1] != destiny[1]:
+            if self.destiny[0] == origin[0]-1 and self.destiny[1] == self.origin[1] - 3:
                 return True
-            elif origin[1] == destiny[1] and origin[0] != destiny[0]:
+            elif self.destiny[0] == self.origin[0] - 3 and self.destiny[1] == self.origin[1] - 1:
+                return True
+            elif self.destiny[0] == self.origin[0] - 1 and self.destiny[1] == self.origin[1] + 3:
+                return True
+            elif self.destiny[0] == self.origin[0] + 3 and self.destiny[1] == self.origin[1] - 1:
+                return True
+        elif self.origin == 'c':
+            if self.origin[0] == self.destiny[0] and self.origin[1] != self.destiny[1]:
+                if self.origin[1] < self.destiny[1]:
+                    self.checkingprogression = True
+                while True:
+                    self.piececheck = 
+                return True
+            elif self.origin[1] == self.destiny[1] and self.origin[0] != self.destiny[0]:
                 return True
             else:
                 return False
