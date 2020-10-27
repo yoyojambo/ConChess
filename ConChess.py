@@ -15,7 +15,7 @@ class chess(object):
     def __init__(self):
         self.board = [
             ['c','k','b','w','q','b','k','c'],
-             ['p','p','p','p','p','p','p','p'],
+            ['p','p','p','p','p','p','p','p'],
             ['', '', '', '', '', '', '', ''],
             ['', '', '', '', '', '', '', ''],
             ['', '', '', '', '', '', '', ''],
@@ -57,7 +57,7 @@ class chess(object):
             pass
         else:
             print("That is not an allowed move for that piece.")
-            break
+            
         if self.board[d[0]][d[1]].isupper != self.board[o[0]][o[1]].isupper and self.board[o[0]][o[1]] != '':
             if self.pieceallowedmove(self.board[o[0]][o[1]].lower(), self.board[d[0]][d[1]]):
                 self.board[d[0]][d[1]] = self.board[o[0]][o[1]]
@@ -71,9 +71,10 @@ class chess(object):
             self.takeinput()
         
     def pieceallowedmove(self, origin, destiny):
+        #Completed: Pawn, Knight, 
         if origin == 'p':
-            if turn:
-                if origin[1] == destiny[1] and origin[0] == destiny[0]+1:
+            if self.turn:
+                if origin[0] == destiny[0]+1 and origin[1] == destiny[1]:
                     return True
             else:
                 if origin[1] == destiny[1] and origin[0] == destiny[0]-1:
@@ -88,14 +89,14 @@ class chess(object):
                 return True
             elif self.destiny[0] == self.origin[0] + 3 and self.destiny[1] == self.origin[1] - 1:
                 return True
-        elif self.origin == 'c':
+        elif self.origin == 'r':
             if self.origin[0] == self.destiny[0] and self.origin[1] != self.destiny[1]:
                 if self.origin[1] < self.destiny[1]:
                     self.checkingprogression = True
                 while True:
-                    self.piececheck = 
+                    pass
                 return True
-            elif self.origin[1] == self.destiny[1] and self.origin[0] != self.destiny[0]:
+            elif self.origin[0] != self.destiny[0] and self.origin[1] == self.destiny[1]:
                 return True
             else:
                 return False
